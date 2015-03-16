@@ -2,11 +2,13 @@
 
 var gulp       = require('gulp'),
     rename     = require('gulp-rename'),
+    mocha      = require('gulp-mocha'),
     jshint     = require('gulp-jshint'),
+    gutil      = require('gulp-util'),
     uglify     = require('gulp-uglifyjs'),
     es         = require('event-stream');
 
-gulp.task('scripts', function () {
+gulp.task('build', function () {
     var normal = gulp.src('backbone.dirty.js')
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
@@ -18,4 +20,15 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('./dist'));
 
     return es.concat(normal, min);
+});
+
+
+gulp.task('test', function() {
+  return gulp.src(['spec/*.js'], { read: false })
+    .pipe(mocha({ reporter: 'nyan' }))
+    .on('error', gutil.log);
+});
+
+gulp.task('watch', function() {
+    gulp.watch(['backbone.dirty.js', 'spec/**'], ['test']);
 });
