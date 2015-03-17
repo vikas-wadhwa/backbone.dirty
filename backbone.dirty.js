@@ -10,7 +10,7 @@
     define(['underscore', 'backbone'], factory);
   } else {
     // Just run it:
-    factory(root._, root.Backbone);
+    root.Backbone.Dirty = factory(root._, root.Backbone);
   }
 
 }(this, function(_, Backbone) {
@@ -42,7 +42,6 @@
         if (_.contains(methods, method)) {
           options.success = _.wrap(options.success, _.bind(function(oldSuccess, data, textStatus, jqXHR) {
             var ret;
-
             if (oldSuccess) {
               ret = oldSuccess.call(this, data, textStatus, jqXHR);
             }
@@ -115,8 +114,8 @@
   var dirty = Backbone.DirtyModel = factory(Backbone.Model);
 
   return {
-    DirtyModel: dirty,
-    dirtyModelFactory: factory
+    Model: dirty,
+    factory: factory
   };
 
 }));

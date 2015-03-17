@@ -1,7 +1,7 @@
 'use strict';
-var expect = require('chai').expect,
-    Backbone = require('backbone'),
-    DirtyModel = require('../backbone.dirty').DirtyModel;
+var expect = chai.expect,
+    DirtyModel = Backbone.Dirty.Model;
+
 
 describe('backbone.dirty', function() {
   beforeEach(function () {
@@ -60,8 +60,37 @@ describe('backbone.dirty', function() {
     });
   });
 
-  describe('#sync', function() {
-    // body...
+  describe('#sync', function () {
+    beforeEach(function () {
+      this.server = sinon.fakeServer.create();
+    });
+
+    afterEach(function () {
+      this.server.restore();
+    });
+
+    it('should reset dirty state and set default attributes when doing create', function (done) {
+      var Model = DirtyModel.extend({ urlRoot: '/tests' }),
+          model = new Model();
+      this.server.respondWith('POST', '/tests',
+        [
+          200,
+          { 'Content-Type': 'application/json' },
+          '{"id":123,"prop":"test"}'
+        ]
+      );
+
+      model.set('prop', 'test');
+      expect(model.isDirty()).to.be.true;
+
+      model.save().done(function () {
+        expect(model.isDirty()).to.be.false;
+        done();
+      });
+
+      this.server.respond();
+
+    });
   });
 
   describe('#rollback', function() {

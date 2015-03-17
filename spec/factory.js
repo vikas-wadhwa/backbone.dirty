@@ -1,7 +1,6 @@
 'use strict';
-var expect = require('chai').expect,
-    Backbone = require('backbone'),
-    factory = require('../backbone.dirty').dirtyModelFactory;
+var expect = chai.expect,
+    factory = Backbone.Dirty.factory;
 
 describe('backbone.dirty factory', function() {
   var hasSet,

@@ -16,6 +16,9 @@
     "node": true,
     "expr": true,
     "globals": {
-      "define": true
+      "define": true,
+      "chai": true,
+      "Backbone": true,
+      "sinon": true
     }
 }
