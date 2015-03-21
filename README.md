@@ -98,7 +98,6 @@ Calling ```set``` will call Backbone.RelationalModel set before updating dirty s
 Returns if the model is dirty or not. Calling ```save``` will reset the dirty state
 on success.
 ```javascript
-// dot syntax
 var person = new Backbone.DirtyModel({ name: 'Bob' });
 
 person.isDirty(); // false 
@@ -106,6 +105,7 @@ person.isDirty(); // false
 person.set('name', 'Bill'); 
 
 person.isDirty(); // true 
+person.save().then(function() { person.isDirty(); /* false */ });
 ```
 
 ### rollback(object | model, options)
