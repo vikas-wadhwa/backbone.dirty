@@ -1,6 +1,6 @@
 'use strict';
 var expect = chai.expect,
-    DirtyModel = Backbone.Dirty.Model;
+    DirtyModel = Backbone.DirtyModel;
 
 
 describe('backbone.dirty', function() {
@@ -77,6 +77,29 @@ describe('backbone.dirty', function() {
           200,
           { 'Content-Type': 'application/json' },
           '{"id":123,"prop":"test"}'
+        ]
+      );
+
+      model.set('prop', 'test');
+      expect(model.isDirty()).to.be.true;
+
+      model.save().done(function () {
+        expect(model.isDirty()).to.be.false;
+        done();
+      });
+
+      this.server.respond();
+
+    });
+
+    it('should reset dirty state and set default attributes when doing update', function (done) {
+      var Model = DirtyModel.extend({ urlRoot: '/tests' }),
+          model = new Model({ id: 1});
+      this.server.respondWith('PUT', '/tests/1',
+        [
+          200,
+          { 'Content-Type': 'application/json' },
+          '{"id":1,"prop":"test"}'
         ]
       );
 

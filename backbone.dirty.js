@@ -10,7 +10,7 @@
     define(['underscore', 'backbone'], factory);
   } else {
     // Just run it:
-    root.Backbone.Dirty = factory(root._, root.Backbone);
+    root.Backbone.DirtyModel = factory(root._, root.Backbone);
   }
 
 }(this, function(_, Backbone) {
@@ -74,6 +74,8 @@
       resetDirty: function () {
         this.dirty = false;
         this.changed = {};
+
+        this.trigger('clean', this);
       },
 
       _checkDirty: function (model) {
@@ -111,11 +113,9 @@
     });
   };
 
-  var dirty = Backbone.DirtyModel = factory(Backbone.Model);
+  var dirty = factory(Backbone.Model);
 
-  return {
-    Model: dirty,
-    factory: factory
-  };
+  dirty.factory = factory;
 
+  return dirty;
 }));
