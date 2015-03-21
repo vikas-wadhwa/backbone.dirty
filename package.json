@@ -7,26 +7,30 @@
     "type": "git",
     "url": "git://github.com/drowzy/backbone.dirty.git"
   },
-  "keywords": [],
+  "keywords": [
+    "backbone",
+    "unsaved",
+    "dirty",
+    "browser"
+  ],
   "author": "Simon Thörnqvist <simon.thornqvist@gmail.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "backbone": "^1.1.2",
+    "underscore": "^1.6.0"
+  },
+  "devDependencies": {
     "chai": "^2.1.1",
     "event-stream": "^3.3.0",
     "gulp": "^3.8.11",
-    "gulp-browserify": "^0.5.1",
     "gulp-jshint": "^1.9.2",
     "gulp-rename": "^1.2.0",
     "gulp-uglifyjs": "^0.6.1",
-    "jquery": "^2.1.3",
     "jshint-stylish": "^1.0.1",
     "mocha": "^2.2.1",
     "sinon": "^1.14.0",
-    "testem": "^0.7.5",
-    "underscore": "^1.8.2"
+    "testem": "^0.7.5"
   },
   "scripts": {
     "test": "./node_modules/.bin/testem"
