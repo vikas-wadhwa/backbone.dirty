@@ -30,8 +30,9 @@
       },
 
       set: _.wrap(Model.prototype.set, function(oldSet, key, value, options) {
-        oldSet.call(this, key, value, options);
+        result = oldSet.call(this, key, value, options);
         this._checkDirty(this);
+        return result;
       }),
 
       sync: _.wrap(Model.prototype.sync, function (oldSync, method, model, options) {

@@ -1,11 +1,11 @@
 {
   "name": "backbone.dirty",
   "version": "0.0.0",
-  "main": "dist/backbone.dirty.min.js",
+  "main": "backbone.dirty.js",
   "description": "dirty checking for backbone.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/drowzy/backbone.dirty.git"
+    "url": "git://github.com/vikas-wadhwa/backbone.dirty.git"
   },
   "keywords": [
     "backbone",
